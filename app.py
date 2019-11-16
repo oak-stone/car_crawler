@@ -92,7 +92,7 @@ def get_listings(html, listings={}):
 
 def print_listings(listings):
     #print(i,'\b:', model.contents[0].contents[0], '\n\t', price.contents[0], '\b€', '\n\thttps://www.auto24.ee' + link.get('href'))
-    print("\n".join("{}\t{}".format(k, v) for k, v in listings.items()))
+    print("\b" + "\n".join("{}\t{}".format(k, v) for k, v in listings.items()))
         
 def get_usable_make_code_for_search(make, year, gearBox, lookBackPeriod):
     """
@@ -150,8 +150,8 @@ def main():
         elif (crawl_config.crawl == True):
             return(return_listings_as_email_content()) 
         else:
-            print('Error occured. \ncrawl_config is set to False and thus, make sure the enter ALL attributes: python3 app.py <make> <year> <lookBackPeriod>')
-            
+            print('\bError occured. Crawl is set to False and thus, make sure the enter ALL attributes: python3 app.py <make> <year> <gearBox>  <lookBackPeriod>')
+            print('Exiting program')
 
 if __name__ == '__main__':
     main()
