@@ -120,7 +120,7 @@ def print_listings_to_terminal():
         make, year, gearBox, lookBackPeriod = get_usable_make_code_for_search(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
         url = 'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&b=' + make + '&f1=' + year + '&i=' + gearBox + '&ae=2&af=200&ad=' + lookBackPeriod + '&by=2&ag=0&ag=1&otsi=otsi'
         html = BeautifulSoup(get_url_content(url), 'html.parser')
-        print_listings(get_listings(html))
+        print_listings( get_listings(html))
     except Exception as e:
                 print("Error ", e)
 

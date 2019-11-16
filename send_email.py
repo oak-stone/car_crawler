@@ -17,7 +17,9 @@ from email.mime.text import MIMEText
 SCOPES = ['https://www.googleapis.com/auth/gmail.compose']
 
 sender = ''
-to = email_recipients.email_recipients
+#to = email_recipients.email_recipients
+to = ''
+bcc = email_recipients.email_recipients
 date = ((datetime.datetime.now()).strftime("%x"))
 subject = ('Daily Cars: ' + date)
 transmission = ('automatic' if app.crawl_config.gearBox == '2' else 'manual')
@@ -50,9 +52,10 @@ def get_credentials():
     return creds
 
 
-def create_message(sender, to, subject, message_text):
+def create_message(sender, to, bcc, subject, message_text):
   message = MIMEText(message_text)
   message['to'] = to
+  message['Bcc'] = bcc
   message['from'] = sender
   message['subject'] = subject
   return {'raw': base64.urlsafe_b64encode(message.as_string().encode()).decode()}
@@ -70,5 +73,5 @@ def send_message(service, message):
 if __name__ == '__main__':
   creds = get_credentials()
   service = build('gmail', 'v1', credentials=creds)
-  message = create_message(sender, to, subject, message_text)
+  message = create_message(sender, to, bcc, subject, message_text)
   send_message(service, message)
