@@ -1,9 +1,24 @@
 {
-"__comment": "Volvo, Audi, Mercedes-Benz",
 "crawl" : "True",
-"make" : [10, 2, 12], 
-"year" : "2015",
-"gearBox" : "2", 
-"maxPrice" : "27500", 
-"lookBackPeriod" : "1" 
+"type" : "Motorbike",
+
+"Motorbike": {
+    "make" : null,
+    "year" : null,
+    "maxPrice" : "4000",
+    "minPower" : "50",
+    "lookBackPeriod" : "1",
+    "url" : "https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=109&aj=&g2=4000&w1=50&ae=2&af=200&ad=1&ag=0&ag=1&otsi=otsi",
+    "url2" : "https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=109&aj=&g2=' + {Motorbike.maxPrice} + '&w1=' + Motorbike.minPower + '&ae=2&af=200&ad=' + Motorbike.lookBackPeriod + '&ag=0&ag=1&otsi=otsi"
+    },
+
+"Car" : {
+    "__comment": "Volvo, Audi, Mercedes-Benz",
+    "make" : [10, 2, 12], 
+    "year" : "2015",
+    "gearBox" : "2", 
+    "maxPrice" : "27500",
+    "lookBackPeriod" : "1",
+    "url" : "'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&b=' + make + '&f1=' + crawl_config['year'] + '&g2=' + crawl_config['maxPrice'] + '&i=' + crawl_config['gearBox'] + '&ae=2&af=200&ad=' + crawl_config['lookBackPeriod'] + '&by=2&ag=0&ag=1&otsi=otsi'"
+    }
 }

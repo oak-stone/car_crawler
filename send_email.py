@@ -25,8 +25,9 @@ to = ''
 bcc = email_recipients_from_config['email_recipients']
 date = ((datetime.datetime.now()).strftime("%x"))
 subject = ('Daily Cars: ' + date)
-transmission = ('automatic' if app.crawl_config['gearBox'] == '2' else 'manual')
-message_text = ('Today\'s check was run on cars from year ' + app.crawl_config['year'] + ' with ' + transmission + ' transmission, max price of ' + app.crawl_config['maxPrice'] + ('€ and look back window of ') + app.crawl_config['lookBackPeriod'] + ' day(s)\n\n' + str("\n".join("{}\t{}".format(k, v) for k, v in app.main().items())))
+transmission = ('automatic' if app.crawl_config['Car']['gearBox'] == '2' else 'manual')
+#message_text = ('Today\'s check was run on cars from year ' + app.crawl_config['Car']['year'] + ' with ' + transmission + ' transmission, max price of ' + app.crawl_config['Car']['maxPrice'] + ('€ and look back window of ') + app.crawl_config['Car']['lookBackPeriod'] + ' day(s)\n\n' + str("\n".join("{}\t{}".format(k, v) for k, v in app.main().items())))
+message_text = 'Test email\n\n' + str("\n".join("{}\t{}".format(k, v) for k, v in app.main().items()))
 
 def get_credentials():
     """Shows basic usage of the Gmail API.

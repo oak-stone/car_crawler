@@ -129,13 +129,14 @@ def print_listings_to_terminal():
     except Exception as e:
                 print("Error ", e)
 
-def return_listings_as_email_content():
+def return_listings_as_email_content(url):
     listings = {}
-
     try:
-        for make in crawl_config['make']:
+        for make in crawl_config['Car']['make']:
             make = str(make)
-            url = 'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&b=' + make + '&f1=' + crawl_config['year'] + '&g2=' + crawl_config['maxPrice'] + '&i=' + crawl_config['gearBox'] + '&ae=2&af=200&ad=' + crawl_config['lookBackPeriod'] + '&by=2&ag=0&ag=1&otsi=otsi'
+            #Cars
+            #url = 'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&b=' + make + '&f1=' + crawl_config['year'] + '&g2=' + crawl_config['maxPrice'] + '&i=' + crawl_config['gearBox'] + '&ae=2&af=200&ad=' + crawl_config['lookBackPeriod'] + '&by=2&ag=0&ag=1&otsi=otsi'
+            #Motorbikes
             html = BeautifulSoup(get_url_content(url), 'html.parser')
             emailContent = get_listings(html, listings)
 
@@ -154,7 +155,12 @@ def main():
         if len(sys.argv) > 1:
             print_listings_to_terminal()
         elif (crawl_config['crawl'] == "True"):
-            return(return_listings_as_email_content()) 
+            if (crawl_config['type']== 'Motorbike'):
+                url = crawl_config['Motorbike']['url']
+                
+            elif crawl_config['type'] == 'Car':
+                url = crawl_config['Car']['url']
+            return(return_listings_as_email_content(url)) 
         else:
             print('\bError occured. Crawl is set to False and thus, make sure the enter ALL attributes: python3 app.py <make> <year> <gearBox>  <lookBackPeriod>')
             print('Exiting program')
