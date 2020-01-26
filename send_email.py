@@ -16,10 +16,8 @@ from email.mime.text import MIMEText
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.compose']
 
-with open('email_recipients.json') as email_recipients_config, open ('crawl_config.json') as crawl_config:
+with open('email_recipients.json') as email_recipients_config:
   email_recipients_from_config = json.load(email_recipients_config)
-  crawl_config = json.load(crawl_config)
-
 
 sender = ''
 #to = email_recipients.email_recipients
@@ -27,8 +25,8 @@ to = ''
 bcc = email_recipients_from_config['email_recipients']
 date = ((datetime.datetime.now()).strftime("%x"))
 subject = ('Daily Cars: ' + date)
-transmission = ('automatic' if crawl_config['gearBox'] == '2' else 'manual')
-message_text = ('Today\'s check was run on cars from year ' + crawl_config['year'] + ' with ' + transmission + ' transmission, max price of ' +  crawl_config['maxPrice'] + ('€ and look back window of ') + crawl_config['lookBackPeriod'] + ' day(s)\n\n' + str("\n".join("{}\t{}".format(k, v) for k, v in app.main().items())))
+transmission = ('automatic' if app.crawl_config['gearBox'] == '2' else 'manual')
+message_text = ('Today\'s check was run on cars from year ' + app.crawl_config['year'] + ' with ' + transmission + ' transmission, max price of ' + app.crawl_config['maxPrice'] + ('€ and look back window of ') + app.crawl_config['lookBackPeriod'] + ' day(s)\n\n' + str("\n".join("{}\t{}".format(k, v) for k, v in app.main().items())))
 
 def get_credentials():
     """Shows basic usage of the Gmail API.
