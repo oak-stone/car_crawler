@@ -7,7 +7,7 @@ from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
 from mapping import make_to_number
-import crawl_config
+import json
 
 class loader:
     busy = False
@@ -39,6 +39,9 @@ class loader:
         time.sleep(self.delay)
         if exception is not None:
             return False
+
+with open ('crawl_config.json') as crawl_config:
+    crawl_config = json.load(crawl_config)
 
 def get_url_content(url):
     """
@@ -126,10 +129,11 @@ def print_listings_to_terminal():
 
 def return_listings_as_email_content():
     listings = {}
+
     try:
-        for make in crawl_config.make:
+        for make in crawl_config['make']:
             make = str(make)
-            url = 'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&b=' + make + '&f1=' + crawl_config.year + '&g2=' + crawl_config.maxPrice + '&i=' + crawl_config.gearBox + '&ae=2&af=200&ad=' + crawl_config.lookBackPeriod + '&by=2&ag=0&ag=1&otsi=otsi'
+            url = 'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&b=' + make + '&f1=' + crawl_config['year'] + '&g2=' + crawl_config['maxPrice'] + '&i=' + crawl_config['gearBox'] + '&ae=2&af=200&ad=' + crawl_config['lookBackPeriod'] + '&by=2&ag=0&ag=1&otsi=otsi'
             html = BeautifulSoup(get_url_content(url), 'html.parser')
             emailContent = get_listings(html, listings)
 
@@ -147,7 +151,7 @@ def main():
     with loader():
         if len(sys.argv) > 1:
             print_listings_to_terminal()
-        elif (crawl_config.crawl == True):
+        elif (crawl_config['crawl'] == "True"):
             return(return_listings_as_email_content()) 
         else:
             print('\bError occured. Crawl is set to False and thus, make sure the enter ALL attributes: python3 app.py <make> <year> <gearBox>  <lookBackPeriod>')

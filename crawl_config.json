@@ -1,0 +1,9 @@
+{
+"__comment": "Volvo, Infiniti, Audi, Jaguar, Land Rover, Mercedes-Benz",
+"crawl" : "True",
+"make" : [10, 255, 2, 36, 42, 12], 
+"year" : "2010",
+"gearBox" : "2", 
+"maxPrice" : "18000", 
+"lookBackPeriod" : "1" 
+}
