@@ -135,7 +135,10 @@ def return_listings_as_email_content():
     try:
         for make in crawl_config['make']:
             make = str(make)
-            url = 'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&b=' + make + '&f1=' + crawl_config['year'] + '&g2=' + crawl_config['maxPrice'] + '&i=' + crawl_config['gearBox'] + '&ae=2&af=200&ad=' + crawl_config['lookBackPeriod'] + '&by=2&ag=0&ag=1&otsi=otsi'
+            #Cars
+            #url = 'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=100&aj=&b=' + make + '&f1=' + crawl_config['year'] + '&g2=' + crawl_config['maxPrice'] + '&i=' + crawl_config['gearBox'] + '&ae=2&af=200&ad=' + crawl_config['lookBackPeriod'] + '&by=2&ag=0&ag=1&otsi=otsi'
+            #Motorbikes
+            url = 'https://www.auto24.ee/kasutatud/nimekiri.php?bn=2&a=109&aj=&g2=' + crawl_config['maxPriceMotorbike'] + '&k1=' + crawl_config['minPower'] + '&ae=2&af=200&ad=' + crawl_config['lookBackPeriod'] + '&ag=0&ag=1&otsi=otsi'
             html = BeautifulSoup(get_url_content(url), 'html.parser')
             emailContent = get_listings(html, listings)
 

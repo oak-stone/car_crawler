@@ -5,5 +5,7 @@
 "year" : "2015",
 "gearBox" : "2", 
 "maxPrice" : "27500", 
-"lookBackPeriod" : "1" 
+"maxPriceMotorbike" : "4000",
+"lookBackPeriod" : "1", 
+"minPower" : "35"
 }
